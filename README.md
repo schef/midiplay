@@ -1,7 +1,8 @@
 midiplay
 ========
 
-MIDI recorder and sequencer for cli executed by MIDI
+MIDI recorder and sequencer for cli executed by MIDI.
+This program uses https://pypi.python.org/pypi/python-rtmidi
 
 main goals:
 
