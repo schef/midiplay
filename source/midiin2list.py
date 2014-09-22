@@ -15,6 +15,8 @@ log = logging.getLogger('test_midiin_callback')
 
 logging.basicConfig(level=logging.DEBUG)
 
+midiNotes = []
+
 class MidiInputHandler(object):
     def __init__(self, port):
         self.port = port
@@ -26,11 +28,13 @@ class MidiInputHandler(object):
         #print("[%s] @%0.6f %r" % (self.port, self._wallclock, message))
         #print na STDOUT
         print("@%0.6f %r" % (deltatime, message))
+        #float is not limited but could be to 6 zero points or less if problems will accure.
+        midiNotes.append(deltatime, message])
 
 
-#port = sys.argv[1] if len(sys.argv) > 1 else None
+port = sys.argv[1] if len(sys.argv) > 1 else None
 try:
-    midiin, port_name = open_midiport(port = None, use_virtual = True)
+    midiin, port_name = open_midiport(port, use_virtual = True)
 except (EOFError, KeyboardInterrupt):
     sys.exit()
 
@@ -41,7 +45,8 @@ print("Entering main loop. Press Control-C to exit.")
 try:
     # just wait for keyboard interrupt in main thread
     while True:
-        time.sleep(1)
+        time.sleep(3)
+        #print (midiNotes)
 except KeyboardInterrupt:
     print('')
 finally:

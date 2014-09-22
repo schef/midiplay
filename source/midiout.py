@@ -16,10 +16,9 @@ log = logging.getLogger('test_midiout')
 
 logging.basicConfig(level=logging.DEBUG)
 
-#port = sys.argv[1] if len(sys.argv) > 1 else None
-
+port = sys.argv[1] if len(sys.argv) > 1 else None
 try:
-    midiout, port_name = open_midiport(port=None, "output", use_virtual=True)
+    midiout, port_name = open_midiport(port, type_ = "output", use_virtual=True)
 except (EOFError, KeyboardInterrupt):
     sys.exit()
 
