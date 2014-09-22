@@ -29,7 +29,7 @@ class MidiInputHandler(object):
         #print na STDOUT
         print("@%0.6f %r" % (deltatime, message))
         #float is not limited but could be to 6 zero points or less if problems will accure.
-        midiNotes.append(deltatime, message])
+        midiNotes.append([deltatime, message])
 
 
 port = sys.argv[1] if len(sys.argv) > 1 else None
@@ -46,7 +46,7 @@ try:
     # just wait for keyboard interrupt in main thread
     while True:
         time.sleep(3)
-        #print (midiNotes)
+        print (midiNotes)
 except KeyboardInterrupt:
     print('')
 finally:
