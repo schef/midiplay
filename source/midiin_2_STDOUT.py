@@ -24,12 +24,13 @@ class MidiInputHandler(object):
         message, deltatime = event
         self._wallclock += deltatime
         #print("[%s] @%0.6f %r" % (self.port, self._wallclock, message))
-        print("[%s] @%0.6f %r" % (self.port, deltatime, message))
+        #print na STDOUT
+        print("@%0.6f %r" % (deltatime, message))
 
 
-port = sys.argv[1] if len(sys.argv) > 1 else None
+#port = sys.argv[1] if len(sys.argv) > 1 else None
 try:
-    midiin, port_name = open_midiport(port)
+    midiin, port_name = open_midiport(port = None, use_virtual = True)
 except (EOFError, KeyboardInterrupt):
     sys.exit()
 
