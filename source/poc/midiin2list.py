@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-#
-# test_midiin_callback.py
-#
-"""Shows how to receive MIDI input by setting a callback function."""
 
 import logging
 import sys
@@ -15,6 +11,8 @@ log = logging.getLogger('test_midiin_callback')
 
 logging.basicConfig(level=logging.DEBUG)
 
+midiNotes = []
+
 class MidiInputHandler(object):
     def __init__(self, port):
         self.port = port
@@ -23,9 +21,10 @@ class MidiInputHandler(object):
     def __call__(self, event, data=None):
         message, deltatime = event
         self._wallclock += deltatime
-        #print("[%s] @%0.6f %r" % (self.port, self._wallclock, message))
         #print na STDOUT
-        print("@%0.6f %r" % (deltatime, message))
+        #print("@%0.6f %r" % (deltatime, message))
+        #float is not limited but could be to 6 zero points or less if problems will accure.
+        midiNotes.append([deltatime, message])
 
 
 port = sys.argv[1] if len(sys.argv) > 1 else None
@@ -41,7 +40,8 @@ print("Entering main loop. Press Control-C to exit.")
 try:
     # just wait for keyboard interrupt in main thread
     while True:
-        time.sleep(1)
+        time.sleep(3)
+        #print (midiNotes)
 except KeyboardInterrupt:
     print('')
 finally:
