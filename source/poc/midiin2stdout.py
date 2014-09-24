@@ -20,8 +20,14 @@ class MidiInputHandler(object):
         message, deltatime = event
         self._wallclock += deltatime
         #print na STDOUT
-        print("@%0.6f %r" % (deltatime, message))
+        if compare(message, play):
+            print ("play")
+        elif compare(message, rec):
+            print ("rec")
+        #print("@%0.6f %r" % (deltatime, message))
 
+play = [148, 36, 100]
+rec = [148, 37, 100]
 
 port = sys.argv[1] if len(sys.argv) > 1 else None
 try:
