@@ -12,7 +12,8 @@ import rtmidi
 from rtmidi.midiutil import open_midiport
 import sys
 
-acceptNotes = [128, 129, 130, 131, 144, 145, 146, 147]
+#acceptNotes = [128, 129, 130, 131, 144, 145, 146, 147]
+acceptNotes = [129, 130, 131, 145, 146, 147]
 
 def list2file(myList, myFile):    # write list to a file
     """
@@ -91,7 +92,12 @@ def midiin2list(client_name, port_name):
                 if message[0] in acceptNotes:
                     myList.append([deltatime, message])
                     print(message)
+                #myList.append([deltatime, message])
+                #print(message)
             time.sleep(0.01)
     except KeyboardInterrupt:
         print('Recording stoped')
     return(myList)
+
+def dioda(self, stanje, vel):
+	self.send_message([stanje[0], stanje[1], vel])
